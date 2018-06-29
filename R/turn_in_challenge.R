@@ -11,7 +11,6 @@ turn_in_challenge <- function() {
 }
 
 .turn_in_challenge <- function() {
-  matahari::dance_start()
   matahari::dance_stop()
 
   if (!("./final_analysis" %in% list.dirs())) {
@@ -19,10 +18,15 @@ turn_in_challenge <- function() {
   }
 
   id <- stringi::stri_rand_strings(n = 1, length = 50)
-  analysis <- tibble::add_column(id = id,
-                                 matahari::dance_tbl())
-  save(analysis,
-       file = glue::glue("final_analysis/{id}_analysis.rda"))
+
+  if (is.null(matahari::dance_tbl())) {
+    utils::savehistory(glue::glue("final_analysis/{id}_history"))
+  } else {
+    analysis <- tibble::add_column(id = id,
+                                   matahari::dance_tbl())
+    save(analysis,
+         file = glue::glue("final_analysis/{id}_analysis.rda"))
+  }
 
   utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
 }
