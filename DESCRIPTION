@@ -1,0 +1,14 @@
+Package: pchallenge
+Type: Package
+Title: Helper funtions for the P-value Challenge
+Version: 0.1.0
+Author: "Lucy D'Agostino McGowan"
+Maintainer: "Lucy D'Agostino McGowan" <lucydagostino@gmail.com>
+Description: This package contains helper functions to begin and turn in the
+    p-value challenge results.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Imports: matahari,
+    glue
