@@ -22,11 +22,7 @@ turn_in_challenge <- function() {
   analysis <- tibble::add_column(id = id,
                                  matahari::dance_tbl())
   save(analysis,
-       file = glue::glue("final_analysis/{id}_analysis.Rda"))
+       file = glue::glue("final_analysis/{id}_analysis.rda"))
 
-  file.copy("analysis.Rmd",
-            glue::glue("final_analysis/{id}_analysis.Rmd"),
-            overwrite = TRUE)
-
-  browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
+  utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
 }
