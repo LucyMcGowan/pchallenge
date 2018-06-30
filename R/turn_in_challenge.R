@@ -23,11 +23,10 @@ turn_in_challenge <- function() {
 
         id <- stringi::stri_rand_strings(n = 1, length = 50)
 
-        if (is.null(matahari::dance_tbl())) {
-          utils::savehistory(glue::glue("final_analysis/{id}_history"))
-        } else {
-          analysis <- tibble::add_column(id = id,
-                                         matahari::dance_tbl())
+        utils::savehistory(glue::glue("final_analysis/{id}_history"))
+        if (!is.null(matahari::dance_tbl())) {
+          d <- matahari::dance_tbl()[, c("expr", "dt")]
+          analysis <- tibble::add_column(id = id, d)
           save(analysis,
                file = glue::glue("final_analysis/{id}_analysis.rda"))
         }
@@ -89,5 +88,6 @@ copy_report <- function(f) {
 ## TODO change this if PR is accepted to matahari package to remove clipr necessity
 my_report <- function() {
   matahari:::add_session_info()
-  jsonlite::base64_enc(serialize(matahari::dance_tbl(), NULL))
+  d <- matahari::dance_tbl()[, c("expr", "dt")]
+  jsonlite::base64_enc(serialize(d, NULL))
 }
