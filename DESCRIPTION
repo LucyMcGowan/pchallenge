@@ -14,4 +14,5 @@ Imports: matahari,
     glue,
     stringi,
     tibble,
-    rstudioapi
+    rstudioapi,
+    jsonlite

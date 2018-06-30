@@ -53,8 +53,10 @@ visit_survey_monkey <- function() {
 
 explain_report <- function() {
   rstudioapi::showQuestion(title = "Explain Report",
-                           message = glue::glue("A file will open with your R report. Press ctrl + A ",
-                                                "to select the text and ctrl + C to copy it. Then press Save. \n\n",
+                           message = glue::glue("A file will open with your R report. \n  ",
+                                                "* Press ctrl + A to select the text \n  ",
+                                                "* Press ctrl + C to copy the text \n  ",
+                                                "* Press press Save. \n\n",
                                                 "Note: this file will look like a garbled mess, ",
                                                 "don't worry we can read it with R."),
                            "Got it",
@@ -72,10 +74,8 @@ write_report <- function() {
 
 copied_report <- function() {
   rstudioapi::showQuestion("Copied Report?",
-                           message = glue::glue("Did you successfully copy your full report? ",
-                                                "If not, click \"No, return to report\", press ctrl + A ",
-                                                "to select the report and ctrl + C to copy it."),
-                           "Yes, I have the report copied to my clipboard",
+                           message = glue::glue("Did you successfully copy your full report?"),
+                           "Yes, I have the full report copied to my clipboard",
                            "No, return to report")
 }
 
