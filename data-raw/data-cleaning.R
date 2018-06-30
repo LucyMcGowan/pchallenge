@@ -36,11 +36,11 @@ set.seed(7)
 rand <- runif(length(unique(df$date)))
 df <- tibble(
   date = unique(df$date),
-  PIRATE_HAT = round(rbeta(length(unique(df$date)), 10, 2) * 1500)
+  PIRATE_HATS = round(rbeta(length(unique(df$date)), 10, 2) * 1500)
 )  %>%
-  mutate(PIRATE_HAT = case_when(
+  mutate(PIRATE_HATS = case_when(
     rand < 0.01 ~ NA_real_,
-    TRUE ~ PIRATE_HAT
+    TRUE ~ PIRATE_HATS
   )) %>%
   left_join(df)
 
