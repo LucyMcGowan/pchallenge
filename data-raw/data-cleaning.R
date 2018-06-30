@@ -44,4 +44,5 @@ df <- tibble(
   )) %>%
   left_join(df)
 
+df <- set_names(df, toupper)
 save(df, file = "data/df.rda")
