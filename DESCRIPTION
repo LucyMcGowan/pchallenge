@@ -13,4 +13,5 @@ RoxygenNote: 6.0.1
 Imports: matahari,
     glue,
     stringi,
-    tibble
+    tibble,
+    rstudioapi
