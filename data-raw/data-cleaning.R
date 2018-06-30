@@ -21,12 +21,27 @@ df <- map(files, read_disney_data) %>%
 metadata <- read_csv("data-raw/metadata.csv") %>%
   mutate(date = as.Date(DATE, "%m/%d/%Y"))
 
-df <- df %>%
+df_all <- df %>%
   left_join(metadata, by = "date")
 
-save(df, file = "data-raw/df.rda")
+save(df_all, file = "data-raw/df_all.rda")
 
-df <- df %>%
-  filter(YEAR == "2018", MONTHOFYEAR == "6")
+df <- df_all %>%
+  filter(attraction == "pirates_of_caribbean") %>%
+  mutate(hour = lubridate::hour(datetime)) %>%
+  group_by(date, hour) %>%
+  filter(row_number() == 1)
+
+set.seed(7)
+rand <- runif(length(unique(df$date)))
+df <- tibble(
+  date = unique(df$date),
+  PIRATE_HAT = round(rbeta(length(unique(df$date)), 10, 2) * 1500)
+)  %>%
+  mutate(PIRATE_HAT = case_when(
+    rand < 0.01 ~ NA_real_,
+    TRUE ~ PIRATE_HAT
+  )) %>%
+  left_join(df)
 
 save(df, file = "data/df.rda")
