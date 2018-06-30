@@ -4,7 +4,7 @@
 #'
 #' @usage data(df)
 #'
-#' @references Disney World Ride Wait Time Datasets, TouringPlans.com, June 2018,
+#' @references This is synthetic data derived from Disney World Ride Wait Time Datasets, TouringPlans.com, June 2018,
 #' https://www.touringplans.com/walt-disney-world/crowd-calendar/#DataSets, Accessed 28 June 2018.
 #'
 #' @source \href{https://touringplans.com/walt-disney-world/crowd-calendar#DataSets}{Touring Plans Datasets}

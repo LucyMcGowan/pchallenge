@@ -4,7 +4,7 @@
 \name{df}
 \alias{df}
 \title{Touring Plans Wait Time Data}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 31059 rows and 195 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 31879 rows and 197 columns.}
 \source{
 \href{https://touringplans.com/walt-disney-world/crowd-calendar#DataSets}{Touring Plans Datasets}
 }
@@ -18,7 +18,7 @@ Touring Plans Wait Time Data
 data(df)
 }
 \references{
-Disney World Ride Wait Time Datasets, TouringPlans.com, June 2018,
+This is synthetic data derived from Disney World Ride Wait Time Datasets, TouringPlans.com, June 2018,
 https://www.touringplans.com/walt-disney-world/crowd-calendar/#DataSets, Accessed 28 June 2018.
 }
 \keyword{datasets}
