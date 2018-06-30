@@ -33,7 +33,6 @@ turn_in_challenge <- function() {
         }
         utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
       }
-      matahari::dance_start()
     }
   }
 }
@@ -63,7 +62,6 @@ explain_report <- function() {
                            "cancel")
 }
 write_report <- function() {
-  matahari::dance_stop()
   # TODO change this if matahari PR is accepted
   # d <- matahari::dance_report()
   d <- my_report()

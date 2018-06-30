@@ -9,7 +9,7 @@ start_challenge <- function() {
 
 .start_challenge <- function() {
   if (start_question()) {
-  matahari::dance_start()
+  matahari::dance_start(value = TRUE)
   }
 }
 
