@@ -4,7 +4,7 @@
 \name{df}
 \alias{df}
 \title{Touring Plans Wait Time Data}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 31879 rows and 197 columns.}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 31879 rows and 196 columns.}
 \source{
 \href{https://touringplans.com/walt-disney-world/crowd-calendar#DataSets}{Touring Plans Datasets}
 }

@@ -45,4 +45,5 @@ df <- tibble(
   left_join(df)
 
 df <- set_names(df, toupper)
+df <- df[, -1] ## Drop extra date column
 save(df, file = "data/df.rda")
