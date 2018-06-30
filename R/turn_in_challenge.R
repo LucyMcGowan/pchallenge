@@ -54,7 +54,7 @@ visit_survey_monkey <- function() {
 explain_report <- function() {
   rstudioapi::showQuestion(title = "Explain Report",
                            message = glue::glue("A file will open with your R report. Press ctrl + A ",
-                                                "to select the text and ctrl + C to copy it.\n\n",
+                                                "to select the text and ctrl + C to copy it. Then press Save. \n\n",
                                                 "Note: this file will look like a garbled mess, ",
                                                 "don't worry we can read it with R."),
                            "Got it",
@@ -62,7 +62,9 @@ explain_report <- function() {
 }
 write_report <- function() {
   matahari::dance_stop()
-  d <- matahari::dance_report()
+  # TODO change this if matahari PR is accepted
+  # d <- matahari::dance_report()
+  d <- my_report()
   file <- tempfile()
   writeLines(d, file)
   file
@@ -84,4 +86,10 @@ copy_report <- function(f) {
       copy_report(f)
     } else TRUE
   }
+}
+
+## TODO change this if PR is accepted to matahari package to remove clipr necessity
+my_report <- function() {
+  matahari:::add_session_info()
+  jsonlite::base64_enc(serialize(matahari::dance_tbl(), NULL))
 }
