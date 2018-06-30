@@ -12,21 +12,31 @@ turn_in_challenge <- function() {
 
 .turn_in_challenge <- function() {
   matahari::dance_stop()
+  matahari::dance_report()
+  message("Your R report has been copied to your clipboard.\n Use (ctrl + v) to paste ",
+          "this in the first question on SurveyMonkey.")
 
-  if (!("./final_analysis" %in% list.dirs())) {
-    dir.create("final_analysis")
+  if (visit_survey_monkey) {
+    if (!("./final_analysis" %in% list.dirs())) {
+      dir.create("final_analysis")
+    }
+
+    id <- stringi::stri_rand_strings(n = 1, length = 50)
+
+    if (is.null(matahari::dance_tbl())) {
+      utils::savehistory(glue::glue("final_analysis/{id}_history"))
+    } else {
+      analysis <- tibble::add_column(id = id,
+                                     matahari::dance_tbl())
+      save(analysis,
+           file = glue::glue("final_analysis/{id}_analysis.rda"))
+    }
+    utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
   }
+  matahari::dance_start()
+}
 
-  id <- stringi::stri_rand_strings(n = 1, length = 50)
-
-  if (is.null(matahari::dance_tbl())) {
-    utils::savehistory(glue::glue("final_analysis/{id}_history"))
-  } else {
-    analysis <- tibble::add_column(id = id,
-                                   matahari::dance_tbl())
-    save(analysis,
-         file = glue::glue("final_analysis/{id}_analysis.rda"))
-  }
-
-  utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
+visit_survey_monkey <- function() {
+  cat("Are you ready to visit SurveyMonkey to input your final results?", sep = "")
+  utils::menu(c("Yes", "No")) == 1
 }
