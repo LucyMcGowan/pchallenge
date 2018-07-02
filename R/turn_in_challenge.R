@@ -12,29 +12,62 @@ turn_in_challenge <- function() {
 
 .turn_in_challenge <- function() {
   if (ready()) {
+    if (consented()) {
 
-    f <- write_report()
-    if (isTRUE(copy_report(f))) {
+      f <- write_report()
+      if (isTRUE(copy_report(f))) {
 
-      if (visit_survey_monkey()) {
-        if (!("./final_analysis" %in% list.dirs())) {
-          dir.create("final_analysis")
+        if (visit_survey_monkey()) {
+          if (!("./final_analysis" %in% list.dirs())) {
+            dir.create("final_analysis")
+          }
+
+          id <- stringi::stri_rand_strings(n = 1, length = 50)
+
+          utils::savehistory(glue::glue("final_analysis/{id}_history"))
+          if (!is.null(matahari::dance_tbl())) {
+            d <- matahari::dance_tbl()[, c("expr", "dt")]
+            analysis <- tibble::add_column(id = id, d)
+            save(analysis,
+                 file = glue::glue("final_analysis/{id}_analysis.rda"))
+          }
+          utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
         }
-
-        id <- stringi::stri_rand_strings(n = 1, length = 50)
-
-        utils::savehistory(glue::glue("final_analysis/{id}_history"))
-        if (!is.null(matahari::dance_tbl())) {
-          d <- matahari::dance_tbl()[, c("expr", "dt")]
-          analysis <- tibble::add_column(id = id, d)
-          save(analysis,
-               file = glue::glue("final_analysis/{id}_analysis.rda"))
-        }
-        utils::browseURL(glue::glue("https://www.surveymonkey.com/r/8LPW6XM?id={id}"))
       }
     }
   }
 }
+
+consented <- function() {
+  if (is.null(matahari::dance_tbl())) {
+    no_consent()
+    return(FALSE)
+  }
+  d <- matahari::dance_tbl()
+  if (!any(purrr::map_lgl(d$expr, consented_string))) {
+    no_consent()
+    return(FALSE)
+  }
+  TRUE
+}
+
+consented_string <- function(x) {
+  if (is.character(x)) {
+    grepl("consented", x)
+  } else {
+    FALSE
+  }
+}
+no_consent <- function() {
+  rstudioapi::showQuestion("No Consent",
+                           message = glue::glue("We do not have a record of your consent. ",
+                                                "If you agree to participate in this challenge, please ",
+                                                "run start_challenge()."),
+                           "Okay",
+                           "cancel"
+  )
+}
+
 
 ready <- function() {
   rstudioapi::showQuestion("Ready?",
@@ -42,6 +75,7 @@ ready <- function() {
                            "Yes",
                            "No")
 }
+
 visit_survey_monkey <- function() {
   rstudioapi::showQuestion("SurveyMonkey",
                            message = "Be sure pop-ups are enabled on your browser. \n\nAre you ready to visit SurveyMonkey to input your final results?",
