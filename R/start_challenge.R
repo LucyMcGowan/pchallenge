@@ -58,7 +58,8 @@ start_question <- function() {
                                                 "you fit. You will then be asked to fill out some answers on SurveyMonkey. The data from ",
                                                 "all participants will be compiled into a single data set by the investigators in the study ",
                                                 "and then analyzed and released to the community. We plan to release all data collected from ",
-                                                "this study openly online via sites like Github and Figshare."),
+                                                "this study openly online via sites like Github and Figshare.\n\n",
+                                                "Please read the consent form before continuing: http://phackathon.netlify.com/consent/"),
                            "Yes, I agree to participate in this challenge",
                            "No, I do not agree to participate in this challenge")
 }

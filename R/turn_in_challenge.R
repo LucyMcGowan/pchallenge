@@ -85,8 +85,8 @@ visit_survey_monkey <- function() {
 explain_report <- function() {
   rstudioapi::showQuestion(title = "Explain Report",
                            message = glue::glue("A file will open with your R report. \n  ",
-                                                "* Press ctrl + A to select the text \n  ",
-                                                "* Press ctrl + C to copy the text \n  ",
+                                                "* Press ctrl + A (cmd + A on a mac) to select the text \n  ",
+                                                "* Press ctrl + C (cmd + C on a mac) to copy the text \n  ",
                                                 "* Press press Save. \n\n",
                                                 "Note: this file will look like a garbled mess, ",
                                                 "don't worry we can read it with R."),
