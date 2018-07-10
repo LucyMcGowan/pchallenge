@@ -10,7 +10,7 @@ start_challenge <- function() {
 .start_challenge <- function() {
   matahari::dance_start()
   if (consent()) {
-    utils::data(df)
+    utils::data("df", package = "pchallenge")
   }
 }
 
