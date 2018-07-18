@@ -30,9 +30,12 @@ df <- df_all %>%
   filter(attraction == "pirates_of_caribbean") %>%
   mutate(hour = lubridate::hour(datetime)) %>%
   group_by(date, hour) %>%
-  filter(row_number() == 1)
+  filter(row_number() == 1) %>%
+  filter(YEAR %in% c(2017, 2018)) %>%
+  select(- attraction) %>%
+  ungroup()
 
-set.seed(7)
+set.seed(926)
 rand <- runif(length(unique(df$date)))
 df <- tibble(
   date = unique(df$date),
@@ -46,4 +49,40 @@ df <- tibble(
 
 df <- set_names(df, toupper)
 df <- df[, -1] ## Drop extra date column
+
+# library(rms)
+# df_ <- df %>%
+# select(- HSPRDDT1, - HSPRDDN, - AKPRDDT1, - AKPRDDT2, - AKPRDDN, - AKFIREN)
+# dd <- datadist(df_)
+# options(datadist = "dd")
+#
+# ols(SPOSTMIN ~ MERCHANDISE, data = df_)
+#
+# ols(SPOSTMIN ~ MERCHANDISE, data = df_[df_$SPOSTMIN != -999, ])
+#
+#
+# ols(
+#   SPOSTMIN ~ rcs(MERCHANDISE, 9),
+#   data = df_[df_$SPOSTMIN != -999, ]
+#   ) %>%
+#   anova()
+#
+# df_ %>%
+#   filter(SPOSTMIN != -999) %>%
+#   mutate(p = ols(SPOSTMIN ~ rcs(MERCHANDISE, 9), data = .) %>%
+#            predict()) %>%
+#   arrange(MERCHANDISE) %>%
+#   ggplot(aes(x = MERCHANDISE, y = p)) + geom_line()
+#
+# ols(
+#    SPOSTMIN ~ rcs(MERCHANDISE, 9),
+#    data = df
+#    ) %>%
+#    anova()
+#
+# df__ <- df_ %>%
+#   filter(WDW_TICKET_SEASON == "value", SPOSTMIN != -999)
+# ols(SPOSTMIN ~ rcs(MERCHANDISE), df__) %>%
+#   anova()
+
 save(df, file = "data/df.rda")
