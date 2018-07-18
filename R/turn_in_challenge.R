@@ -89,7 +89,8 @@ explain_report <- function() {
                                                 "* Press ctrl + C (cmd + C on a mac) to copy the text \n  ",
                                                 "* Press press Save. \n\n",
                                                 "Note: this file will look like a garbled mess, ",
-                                                "don't worry we can read it with R."),
+                                                "don't worry we can read it with R. We will use this to ",
+                                                "verify the p-value you submit."),
                            "Got it",
                            "cancel")
 }
